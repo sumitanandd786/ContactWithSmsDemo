@@ -20,8 +20,8 @@ class TabPagerAdapter(fm: FragmentManager) :
 
     private val mFragmentList = ArrayList<Fragment>()
     private val mFragmentTitleList = ArrayList<String>()
-    private val mFragmentCounterList = ArrayList<Int>()
-    private var counter: Int? = 0
+    //private val mFragmentCounterList = ArrayList<Int>()
+    //private var counter: Int? = 0
 
     override fun getItem(position: Int): Fragment? {
         val bundle = Bundle()
@@ -38,18 +38,23 @@ class TabPagerAdapter(fm: FragmentManager) :
     fun addFragment(fragment: Fragment, title: String) {
         mFragmentList.add(fragment)
         mFragmentTitleList.add(title)
-        mFragmentCounterList.add(0)
+        //mFragmentCounterList.add(0)
     }
 
     fun setFragmentTitleCount(position: Int, count: Int) {
-        if (position > -1 && position < mFragmentTitleList.size && mFragmentCounterList.size > position) {
+        /*if (position > -1 && position < mFragmentTitleList.size && mFragmentCounterList.size > position) {
             mFragmentCounterList.set(position, count)
+            notifyDataSetChanged();
+        }*/
+        if (position > -1 && position < mFragmentTitleList.size) {
+            //mFragmentCounterList.set(position, count)
             notifyDataSetChanged();
         }
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return mFragmentTitleList[position] + " (" + mFragmentCounterList[position] + ")"
+        return mFragmentTitleList[position]
+        //+ " (" + mFragmentCounterList[position] + ")"
     }
 
 

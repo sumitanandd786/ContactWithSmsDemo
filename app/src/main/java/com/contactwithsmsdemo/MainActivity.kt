@@ -25,10 +25,10 @@ import android.support.v4.app.FragmentActivity
 import android.util.Log
 import bolts.Continuation
 import bolts.Task
-import com.contactwithsmsdemo.utility.phonebook.Contact
-import com.contactwithsmsdemo.utility.phonebook.Contacts
-import com.contactwithsmsdemo.utility.phonebook.Contacts.getQuery
-import com.contactwithsmsdemo.utility.phonebook.Query
+//import com.contactwithsmsdemo.utility.phonebook.Contact
+//import com.contactwithsmsdemo.utility.phonebook.Contacts
+//import com.contactwithsmsdemo.utility.phonebook.Contacts.getQuery
+//import com.contactwithsmsdemo.utility.phonebook.Query
 import com.google.gson.GsonBuilder
 import java.util.concurrent.Callable
 
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            queryContacts()
+            //queryContacts()
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS),
@@ -151,11 +151,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == READ_CONTACT_PERMISSION_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            queryContacts()
+            //queryContacts()
         }
     }
 
-    private fun queryContacts() {
+    /*private fun queryContacts() {
         Task.callInBackground(object : Callable<Void> {
             @Throws(Exception::class)
             override fun call(): Void? {
@@ -186,5 +186,5 @@ class MainActivity : AppCompatActivity() {
                 return null
             }
         })
-    }
+    }*/
 }
