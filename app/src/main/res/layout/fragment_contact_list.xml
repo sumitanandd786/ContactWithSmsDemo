@@ -22,6 +22,6 @@
         android:layout_margin="8dp"
         app:srcCompat="@drawable/ic_round_add_button"
         android:tint="@color/white"
-        />
+        tools:ignore="VectorDrawableCompat" />
 
 </RelativeLayout>

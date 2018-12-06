@@ -8,9 +8,6 @@ import java.util.*
 import java.util.Arrays.asList
 
 
-
-
-
 public class Utility {
 
     fun generateCircleBitmap(context: Context, circleColor: Int, diameterDP: Float, text: String?): Bitmap {
@@ -73,4 +70,5 @@ public class Utility {
     fun getMaterialColor(key: Any): Int {
         return materialColors.get(Math.abs(key.hashCode()) % materialColors.size).toInt()
     }
+
 }

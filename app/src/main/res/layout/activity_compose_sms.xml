@@ -4,19 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:background="@drawable/gray_border">
 
     <ImageView
         android:id="@+id/iv_profile"
         android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_alignParentStart="true"
+        android:layout_height="67dp"
         android:layout_centerVertical="true"
         android:padding="4dp"
         app:srcCompat="@drawable/ic_user" />
 
     <LinearLayout
+        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -28,44 +27,47 @@
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:text="Sumit Anand"
             android:textColor="@color/black"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:weightSum="1"
-            android:orientation="horizontal">
         <TextView
             android:id="@+id/tv_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:text="9481616926"
             android:textSize="12sp" />
 
+        <android.support.design.widget.TextInputLayout style="@style/textinput_style">
 
-       <!-- <ImageView
-            android:id="@+id/iv_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:layout_gravity="right|center_vertical"
-            app:srcCompat="@drawable/ic_message"
-            android:padding="4dp" />-->
-        </LinearLayout>
-
+            <EditText
+                android:id="@+id/et_text_msg"
+                style="@style/form_element_normal_edittext"
+                android:hint="Text Message"
+                android:inputType="textCapSentences"
+                android:textColor="@color/edit_text_selector" />
+        </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
-    <Button
-        android:id="@+id/btn_submit"
-        style="@style/button_bottom"
-        android:text="Send Message" />
 
+
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btn_submit"
+            style="@style/button_bottom"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="Send Message" />
+    </LinearLayout>
 </RelativeLayout>

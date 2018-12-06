@@ -19,10 +19,13 @@ import com.contactwithsmsdemo.fragment.ContactListFragment
 import com.contactwithsmsdemo.fragment.SmsListFragment
 import android.Manifest.permission
 import android.Manifest.permission.READ_CONTACTS
+import android.app.AlertDialog
 import android.os.Build
 import android.content.pm.PackageManager
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.FragmentActivity
 import android.util.Log
+import android.widget.Toast
 import bolts.Continuation
 import bolts.Task
 //import com.contactwithsmsdemo.utility.phonebook.Contact
@@ -51,13 +54,18 @@ class MainActivity : AppCompatActivity() {
     var smsFragment = SmsListFragment()
     private val READ_CONTACT_PERMISSION_REQUEST_CODE = 76
     private val TAG = MainActivity::class.java!!.getSimpleName()
+    val permssoinCode: Int = 200
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        checkPermission()
-        initLayout()
+        //checkPermission()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermssion()
+        }else {
+            initLayout()
+        }
     }
 
     fun initLayout() {
@@ -138,7 +146,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun checkPermission() {
+   /* private fun checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             //queryContacts()
         } else {
@@ -147,44 +155,53 @@ class MainActivity : AppCompatActivity() {
                         READ_CONTACT_PERMISSION_REQUEST_CODE)
             }
         }
-    }
+    }*/
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+   /* override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == READ_CONTACT_PERMISSION_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             //queryContacts()
         }
+    }*/
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+
+        when (requestCode) {
+
+            permssoinCode -> if (grantResults.size > 0) {
+
+                var locationPermissions = grantResults[0] === PackageManager.PERMISSION_GRANTED
+
+                if (!locationPermissions) {
+                    showAlertDialog {
+                        setMessage("Please grant permissoins ")
+                        positiveButton("Yes") {
+                            showToast("Permission Denied!!")
+                        }
+                    }
+                }else{
+                    initLayout()
+                }
+            }
+        }
     }
 
-    /*private fun queryContacts() {
-        Task.callInBackground(object : Callable<Void> {
-            @Throws(Exception::class)
-            override fun call(): Void? {
-                val q = Contacts.getQuery()
-                q.include(Contact.Field.ContactId, Contact.Field.DisplayName, Contact.Field.PhoneNumber, Contact.Field.PhoneNormalizedNumber, Contact.Field.Email)
-                val q1 = Contacts.getQuery()
-                q1.whereEqualTo(Contact.Field.DisplayName, "Sumit Anand")
-                q1.hasPhoneNumber()
+    fun requestPermssion() {
+        ActivityCompat.requestPermissions(this, arrayOf("android.permission.READ_CONTACTS","android.permission.WRITE_CONTACTS","android.permission.READ_SMS", "android.permission.RECEIVE_SMS", "android.permission.SEND_SMS","android.permission.READ_EXTERNAL_STORAGE","android.permission.WRITE_EXTERNAL_STORAGE","android.permission.INTERNET"), permssoinCode);
+    }
 
-                val q2 = Contacts.getQuery()
-                q2.whereStartsWith(Contact.Field.ContactId, "791")
-                q2.hasPhoneNumber()
-                val queries = ArrayList<Query>()
-                queries.add(q1)
-                queries.add(q2)
-                q.or(queries)
+    fun showAlertDialog(dialogBuilder: AlertDialog.Builder.() -> Unit) {
+        val builder = AlertDialog.Builder(this)
+        builder.dialogBuilder()
+        val dialog = builder.create()
 
-                val contacts = q.find()
-                Log.e(TAG, GsonBuilder().setPrettyPrinting().create().toJson(contacts))
-                return null
-            }
-        }).continueWith(object : Continuation<Void, Void> {
-            @Throws(Exception::class)
-            override fun then(task: Task<Void>): Void? {
-                if (task.isFaulted()) {
-                    Log.e(TAG, "find failed", task.getError())
-                }
-                return null
-            }
-        })
-    }*/
+        dialog.show()
+    }
+
+    fun AlertDialog.Builder.positiveButton(text: String = "OK", handleClick: (which: Int) -> Unit = {}) {
+        this.setPositiveButton(text, { dialogInterface, which-> handleClick(which) })
+    }
+
+    fun showToast(msg: String, toastDuration: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(this,msg, toastDuration).show()
+    }
 }
