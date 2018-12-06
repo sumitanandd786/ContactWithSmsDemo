@@ -20,6 +20,7 @@ import android.widget.Toast
 import android.content.BroadcastReceiver
 import android.app.PendingIntent
 import android.content.Context
+import com.contactwithsmsdemo.database.SMSDatabase
 
 
 class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
@@ -56,6 +57,7 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
             personNumberText!!.setText(profileNumber)
         }
         msgText!!.setText("Hi, your OTP is: "+GenerateRandomNumber())
+        //val smsDatabase = SMSDatabase.getInstance(activity)
 
 
         sendSmsButton.setOnClickListener(this)

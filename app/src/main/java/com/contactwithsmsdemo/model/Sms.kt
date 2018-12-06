@@ -1,6 +1,18 @@
 package com.contactwithsmsdemo.model
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+import android.support.annotation.NonNull
+
+@Entity(tableName = "SMSDbModel")
 public class Sms {
+
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "slNo")
+    var slNo: Int = 0
+
     @JvmField var _id: String? = ""
     @JvmField var _personName: String? = ""
     @JvmField var _address: String? = ""
