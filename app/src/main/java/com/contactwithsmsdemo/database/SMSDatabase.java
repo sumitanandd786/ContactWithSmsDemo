@@ -40,10 +40,6 @@ SMSDatabase extends RoomDatabase {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
 
-          /*  database.execSQL("CREATE TABLE IF NOT EXISTS AtCheckinData(slNo INTEGER PRIMARY KEY AUTOINCREMENT,jsonString TEXT, lattitude TEXT, longitude TEXT)");
-            database.execSQL("CREATE TABLE IF NOT EXISTS AutoCheckoutOfflineData(slNo INTEGER PRIMARY KEY AUTOINCREMENT,jsonString TEXT)");
-            database.execSQL("CREATE TABLE IF NOT EXISTS AutoCheckoutOfflineData(slNo INTEGER PRIMARY KEY AUTOINCREMENT,jsonString TEXT)");*/
-
         }
     };
 

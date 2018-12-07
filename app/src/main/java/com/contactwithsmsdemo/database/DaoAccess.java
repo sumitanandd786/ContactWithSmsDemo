@@ -13,18 +13,18 @@ import java.util.List;
 public interface DaoAccess {
 
     @Insert
-    void insertOnlySingleRecord(Sms... atCheckinData);
+    void insertOnlySingleRecord(Sms... smsData);
 
     @Update
-    void updateOnlySingleRecord(Sms... atCheckinData);
+    void updateOnlySingleRecord(Sms... smsData);
 
-    @Query("SELECT COUNT(*) FROM Sms")
-    int getCheckInDataCount();
+    @Query("SELECT COUNT(*) FROM SMSDbModel")
+    int getSendSmsDataCount();
 
-    @Query("SELECT * FROM Sms")
-    List<Sms> getCheckInDataList();
+    @Query("SELECT * FROM SMSDbModel ORDER BY DateTime DESC")
+    List<Sms> getSmsDataList();
 
-    @Query("DELETE FROM Sms")
-    void deleteCheckInData();
+    @Query("DELETE FROM SMSDbModel")
+    void deleteSmsData();
 
 }

@@ -64,6 +64,7 @@ class ContactListFragment: Fragment(),IClickListener {
         }
         //val sortedList = contactList.sortedWith(compareBy { it.name })
         contact_list!!.adapter = ContactAdapter(contactList, this!!.activity!!,listner!!)
+
         //contact_list!!.adapter = ContactAdapter(sortedList, this!!.activity!!,listner!!)
         contacts.close()
 

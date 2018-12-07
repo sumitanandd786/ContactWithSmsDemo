@@ -21,6 +21,9 @@ import android.content.BroadcastReceiver
 import android.app.PendingIntent
 import android.content.Context
 import com.contactwithsmsdemo.database.SMSDatabase
+import android.os.AsyncTask
+import com.contactwithsmsdemo.model.Sms
+import java.text.SimpleDateFormat
 
 
 class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
@@ -34,12 +37,15 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
     internal lateinit var sendSmsButton: Button
     lateinit var activity: Activity
     private val PERMISSION_SEND_SMS = 123
+    var smsDatabase: SMSDatabase? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity = this@ComposeMessageActivity
         setContentView(R.layout.activity_compose_sms)
         ButterKnife.bind(activity)
+        smsDatabase = SMSDatabase.getInstance(activity)
         init()
     }
 
@@ -50,18 +56,24 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
         personNameText = findViewById(R.id.tv_name) as TextView
         personNumberText = findViewById(R.id.tv_number) as TextView
 
+
         if (intent != null) {
             val profileName = intent.getStringExtra("NAME_KEY")
             val profileNumber = intent.getStringExtra("NUMBER_KEY")
             personNameText!!.setText(profileName)
             personNumberText!!.setText(profileNumber)
         }
-        msgText!!.setText("Hi, your OTP is: "+GenerateRandomNumber())
+        msgText!!.setText("Hi, your OTP is: " + GenerateRandomNumber())
         //val smsDatabase = SMSDatabase.getInstance(activity)
 
 
         sendSmsButton.setOnClickListener(this)
 
+    }
+
+    fun getTimeStamp(): String {
+        return SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(Date()).toString()
+        //new Date().getTime());
     }
 
     fun GenerateRandomNumber(): String {
@@ -88,7 +100,7 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
             // permission already granted run sms send
             if (!TextUtils.isEmpty(msgText.text.toString())) {
                 sendSms(personNumberText.text.toString(), msgText.text.toString())
-                finish()
+              //  finish()
             } else {
                 Toast.makeText(activity, "Please enter message", Toast.LENGTH_LONG).show()
             }
@@ -103,7 +115,7 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
                     // permission was granted
                     if (!TextUtils.isEmpty(msgText.text.toString())) {
                         sendSms(personNumberText.text.toString(), msgText.text.toString())
-                        finish()
+                       // finish()
                     } else {
                         Toast.makeText(activity, "Please enter message", Toast.LENGTH_LONG).show()
                     }
@@ -132,6 +144,7 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
                 when (resultCode) {
                     Activity.RESULT_OK -> Toast.makeText(baseContext, "SMS sent",
                             Toast.LENGTH_SHORT).show()
+                        //postSmsData()!!.execute()
                     SmsManager.RESULT_ERROR_GENERIC_FAILURE -> Toast.makeText(baseContext, "Generic failure",
                             Toast.LENGTH_SHORT).show()
                     SmsManager.RESULT_ERROR_NO_SERVICE -> Toast.makeText(baseContext, "No service",
@@ -148,8 +161,8 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
         registerReceiver(object : BroadcastReceiver() {
             override fun onReceive(arg0: Context, arg1: Intent) {
                 when (resultCode) {
-                    Activity.RESULT_OK -> Toast.makeText(baseContext, "SMS delivered",
-                            Toast.LENGTH_SHORT).show()
+                    Activity.RESULT_OK -> postSmsData()!!.execute()
+
                     Activity.RESULT_CANCELED -> Toast.makeText(baseContext, "SMS not delivered",
                             Toast.LENGTH_SHORT).show()
                 }
@@ -157,8 +170,33 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
         }, IntentFilter(DELIVERED))
 
         val sms = SmsManager.getDefault()
-        sms.sendTextMessage(phoneNumber, null, message, null, null)
+        sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI)
 
+    }
+
+
+     inner class postSmsData : AsyncTask<Any, Any, String>() {
+
+        override fun doInBackground(vararg params: Any): String? {
+            val smsDbModel = Sms()
+            smsDbModel.setPersonName(personNameText.text.toString())
+            smsDbModel.setAddress("")
+            smsDbModel.setMsg(msgText.text.toString())
+            smsDbModel.setReadState("")
+            smsDbModel.setTime(getTimeStamp())
+            smsDbModel.setFolderName("sent")
+            smsDatabase!!.daoAccess().insertOnlySingleRecord(smsDbModel);
+
+            return null
+        }
+
+        override fun onPostExecute(result: String?) {
+            //if (result != null) {
+                Toast.makeText(baseContext, "SMS delivered",
+                        Toast.LENGTH_SHORT).show()
+                finish()
+            //}
+        }
     }
 
 

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
 import android.util.DisplayMetrics
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Arrays.asList
 
@@ -69,6 +70,11 @@ public class Utility {
 
     fun getMaterialColor(key: Any): Int {
         return materialColors.get(Math.abs(key.hashCode()) % materialColors.size).toInt()
+    }
+
+    fun getTimeStamp(): String {
+        return SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(Date()).toString()
+        //new Date().getTime());
     }
 
 }

@@ -9,6 +9,7 @@ import com.contactwithsmsdemo.R
 import com.contactwithsmsdemo.interfaces.ISmsClickListener
 import com.contactwithsmsdemo.model.Sms
 import kotlinx.android.synthetic.main.sms_list_item.view.*
+import java.text.SimpleDateFormat
 
 class SendSmsAdapter(items : List<Sms>, ctx: Context, listner: ISmsClickListener) : RecyclerView.Adapter<SendSmsAdapter.ViewHolder>() {
 
@@ -43,5 +44,23 @@ class SendSmsAdapter(items : List<Sms>, ctx: Context, listner: ISmsClickListener
         val linearlayout = v.title_ll!!
 
         //val profile = v.iv_profile!!
+    }
+
+    fun changeDateFormat(currentFormat: String,
+                         neededFormat: String, dateString: String): String {
+
+        var outputDateStr = dateString
+        try {
+            val inputFormat = SimpleDateFormat(currentFormat)
+            val outputFormat = SimpleDateFormat(neededFormat)
+            val date = inputFormat.parse(dateString)
+            outputDateStr = outputFormat.format(date)
+        } catch (e: Exception) {
+
+            e.printStackTrace()
+        }
+
+        return outputDateStr
+
     }
 }

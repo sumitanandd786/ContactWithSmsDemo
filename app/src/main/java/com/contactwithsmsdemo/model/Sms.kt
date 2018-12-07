@@ -13,18 +13,28 @@ public class Sms {
     @ColumnInfo(name = "slNo")
     var slNo: Int = 0
 
-    @JvmField var _id: String? = ""
+   // @JvmField var _id: String? = ""
+   @ColumnInfo(name = "PersonName")
     @JvmField var _personName: String? = ""
+
+    @ColumnInfo(name = "Address")
     @JvmField var _address: String? = ""
+
+    @ColumnInfo(name = "Message")
     @JvmField var _msg: String? = ""
 
+    @ColumnInfo(name = "Type")
     @JvmField var _readState: String? = "" //"0" for have not read sms and "1" for have read sms
+
+    @ColumnInfo(name = "DateTime")
     @JvmField var _time: String? = ""
+
+    @ColumnInfo(name = "FolderName")
     @JvmField var _folderName: String? = ""
 
-    fun setId(valueId: String) {
+   /* fun setId(valueId: String) {
         _id = valueId
-    }
+    }*/
 
     fun setPersonName(valueName: String) {
         _personName = valueName
@@ -46,9 +56,9 @@ public class Sms {
         _folderName = valueFolderName
     }
 
-    fun getId(): String {
+    /*fun getId(): String {
         return _id.toString()
-    }
+    }*/
 
     fun getPersonName(): String {
         return _personName.toString()
