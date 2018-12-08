@@ -2,6 +2,7 @@ package com.contactwithsmsdemo.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,8 @@ class SendSmsAdapter(items : List<Sms>, ctx: Context, listner: ISmsClickListener
 
     override fun onBindViewHolder(holder: SendSmsAdapter.ViewHolder, position: Int) {
         holder.name.text = list[position]._personName
-        holder.msg_date.text = list[position]._time
+        Log.e("",""+list[position]._time)
+        holder.msg_date.text = changeDateFormat("yyyy-mm-dd hh:mm:ss","dd MMM yyyy",list[position]._time.toString())
         holder.msg.text = list[position]._msg
 
         holder.linearlayout.setOnClickListener{

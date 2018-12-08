@@ -85,6 +85,11 @@ class SmsListFragment : Fragment(), ISmsClickListener {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        postSmsData()!!.execute()
+    }
+
 }
 
 

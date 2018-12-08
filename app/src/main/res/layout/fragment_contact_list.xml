@@ -12,16 +12,35 @@
         android:layout_height="match_parent"
         android:layout_margin="2dp" />
 
-    <android.support.design.widget.FloatingActionButton
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
         android:padding="8dp"
-        android:layout_margin="8dp"
-        app:srcCompat="@drawable/ic_round_add_button"
-        android:tint="@color/white"
-        tools:ignore="VectorDrawableCompat" />
+        android:orientation="vertical">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_contact_fb"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:tint="@color/white"
+            app:srcCompat="@drawable/ic_round_add_button"
+            tools:ignore="VectorDrawableCompat" />
+    </LinearLayout>
+
+    <!-- <android.support.design.widget.FloatingActionButton
+     android:id="@+id/add_contact_fb"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignParentBottom="true"
+     android:layout_alignParentEnd="true"
+     android:layout_alignParentRight="true"
+     app:srcCompat="@drawable/ic_round_add_button"
+     android:tint="@color/white"
+     tools:ignore="VectorDrawableCompat" />-->
 
 </RelativeLayout>

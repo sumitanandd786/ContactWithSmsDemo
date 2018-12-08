@@ -4,4 +4,15 @@
     <string name="action_settings">Settings</string>
     <string name="contact_list">Contacts</string>
     <string name="sms_list">Send SMS</string>
+    <string name="first_name">First Name</string>
+    <string name="fname_error">Please enter first name</string>
+
+    <string name="last_name">Last Name</string>
+    <string name="lname_error">Please enter last name</string>
+
+    <string name="contact_no">Contact Number</string>
+    <string name="contact_error">Please enter contact number</string>
+    <string name="invalid_format">Invalid mobile format</string>
+
+
 </resources>
