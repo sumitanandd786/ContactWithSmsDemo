@@ -32,6 +32,7 @@
             tools:ignore="VectorDrawableCompat" />
     </LinearLayout>
 
+
     <!-- <android.support.design.widget.FloatingActionButton
      android:id="@+id/add_contact_fb"
      android:layout_width="wrap_content"

@@ -30,8 +30,7 @@
                 android:id="@+id/et_first_name"
                 style="@style/form_element_normal_edittext"
                 android:hint="First Name"
-                android:layout_margin="5dp"
-                android:padding="5dp"
+                android:layout_marginBottom="5dp"
                 android:inputType="textCapSentences"
                 android:textColor="@color/edit_text_selector" />
         </android.support.design.widget.TextInputLayout>
@@ -42,11 +41,11 @@
                 android:id="@+id/et_last_name"
                 style="@style/form_element_normal_edittext"
                 android:hint="Last Name"
-                android:layout_margin="5dp"
-                android:padding="5dp"
+                android:layout_marginBottom="5dp"
                 android:inputType="textCapSentences"
                 android:textColor="@color/edit_text_selector" />
         </android.support.design.widget.TextInputLayout>
+
 
         <android.support.design.widget.TextInputLayout style="@style/textinput_style">
 
@@ -54,8 +53,7 @@
                 android:id="@+id/et_phone_name"
                 style="@style/form_element_normal_edittext"
                 android:hint="Phone Number"
-                android:layout_margin="5dp"
-                android:padding="5dp"
+                android:layout_marginBottom="5dp"
                 android:inputType="textCapSentences"
                 android:textColor="@color/edit_text_selector" />
         </android.support.design.widget.TextInputLayout>
@@ -66,8 +64,7 @@
                 android:id="@+id/et_email"
                 style="@style/form_element_normal_edittext"
                 android:hint="Email"
-                android:layout_margin="5dp"
-                android:padding="5dp"
+                android:layout_marginBottom="5dp"
                 android:inputType="textCapSentences"
                 android:textColor="@color/edit_text_selector" />
         </android.support.design.widget.TextInputLayout>

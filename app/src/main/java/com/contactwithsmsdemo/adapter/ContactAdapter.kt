@@ -20,6 +20,8 @@ class ContactAdapter(items : List<ContactDTO>, ctx: Context, listner: IClickList
         return list.size
     }
 
+
+
     override fun onBindViewHolder(holder: ContactAdapter.ViewHolder, position: Int) {
         holder.name.text = list[position].name
         holder.number.text = list[position].number

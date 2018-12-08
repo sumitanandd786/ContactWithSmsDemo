@@ -37,6 +37,7 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
     internal lateinit var sendSmsButton: Button
     lateinit var activity: Activity
     private val PERMISSION_SEND_SMS = 123
+    private lateinit var myReceiver: BroadcastReceiver
     var smsDatabase: SMSDatabase? = null
 
 
@@ -100,7 +101,7 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
             // permission already granted run sms send
             if (!TextUtils.isEmpty(msgText.text.toString())) {
                 sendSms(personNumberText.text.toString(), msgText.text.toString())
-              //  finish()
+                //  finish()
             } else {
                 Toast.makeText(activity, "Please enter message", Toast.LENGTH_LONG).show()
             }
@@ -115,7 +116,7 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
                     // permission was granted
                     if (!TextUtils.isEmpty(msgText.text.toString())) {
                         sendSms(personNumberText.text.toString(), msgText.text.toString())
-                       // finish()
+                        // finish()
                     } else {
                         Toast.makeText(activity, "Please enter message", Toast.LENGTH_LONG).show()
                     }
@@ -138,13 +139,32 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
         val deliveredPI = PendingIntent.getBroadcast(this, 0,
                 Intent(DELIVERED), 0)
 
+      /*  myReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                when (resultCode) {
+                    Activity.RESULT_OK -> Toast.makeText(baseContext, "SMS sent", Toast.LENGTH_SHORT).show()
+                    //postSmsData()!!.execute()
+                    SmsManager.RESULT_ERROR_GENERIC_FAILURE -> Toast.makeText(baseContext, "Generic failure",
+                            Toast.LENGTH_SHORT).show()
+                    SmsManager.RESULT_ERROR_NO_SERVICE -> Toast.makeText(baseContext, "No service",
+                            Toast.LENGTH_SHORT).show()
+                    SmsManager.RESULT_ERROR_NULL_PDU -> Toast.makeText(baseContext, "Null PDU",
+                            Toast.LENGTH_SHORT).show()
+                    SmsManager.RESULT_ERROR_RADIO_OFF -> Toast.makeText(baseContext, "Radio off",
+                            Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+        }*/
+
         //---when the SMS has been sent---
         registerReceiver(object : BroadcastReceiver() {
             override fun onReceive(arg0: Context, arg1: Intent) {
                 when (resultCode) {
                     Activity.RESULT_OK -> Toast.makeText(baseContext, "SMS sent",
                             Toast.LENGTH_SHORT).show()
-                        //postSmsData()!!.execute()
+                    //postSmsData()!!.execute()
                     SmsManager.RESULT_ERROR_GENERIC_FAILURE -> Toast.makeText(baseContext, "Generic failure",
                             Toast.LENGTH_SHORT).show()
                     SmsManager.RESULT_ERROR_NO_SERVICE -> Toast.makeText(baseContext, "No service",
@@ -175,7 +195,7 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-     inner class postSmsData : AsyncTask<Any, Any, String>() {
+    inner class postSmsData : AsyncTask<Any, Any, String>() {
 
         override fun doInBackground(vararg params: Any): String? {
             val smsDbModel = Sms()
@@ -192,11 +212,16 @@ class ComposeMessageActivity : AppCompatActivity(), View.OnClickListener {
 
         override fun onPostExecute(result: String?) {
             //if (result != null) {
-                Toast.makeText(baseContext, "SMS delivered",
-                        Toast.LENGTH_SHORT).show()
-                finish()
+            Toast.makeText(baseContext, "SMS delivered",
+                    Toast.LENGTH_SHORT).show()
+            finish()
             //}
         }
+    }
+
+    override fun onStop() {
+        //unregisterReceiver(yourReceiver)
+        super.onStop()
     }
 
 

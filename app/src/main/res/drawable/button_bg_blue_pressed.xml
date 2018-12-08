@@ -12,6 +12,7 @@
         android:startColor="@color/lighter_gray" />
 
     <corners android:radius="5px" />
+
 </shape>
 
 

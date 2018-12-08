@@ -30,6 +30,7 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".DetailContactActivity"/>
         <activity android:name=".ComposeMessageActivity"/>
+        <activity android:name=".AddContactActivity"/>
 
         <receiver android:name=".receivers.MyBroadcastReceiver">
             <intent-filter>

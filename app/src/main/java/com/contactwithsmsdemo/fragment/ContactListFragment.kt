@@ -58,13 +58,17 @@ class ContactListFragment : Fragment(), IClickListener, View.OnClickListener {
     fun loadList() {
         contact_list!!.layoutManager = LinearLayoutManager(activity)
         val contactList: MutableList<ContactDTO> = ArrayList()
-        val contacts = getActivity()!!.contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null)
+
+        val contacts = getActivity()!!.contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null,null,
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC")
         while (contacts.moveToNext()) {
             val name = contacts.getString(contacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
             val number = contacts.getString(contacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
             val obj = ContactDTO()
             obj.name = name
             obj.number = number
+
+
 
             /*val photo_uri = contacts.getString(contacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI))
             if (photo_uri != null) {
@@ -100,7 +104,6 @@ class ContactListFragment : Fragment(), IClickListener, View.OnClickListener {
         val intent = Intent(activity, AddContactActivity::class.java)
         startActivity(intent)
     }
-
 
 
 }

@@ -4,4 +4,6 @@ import com.contactwithsmsdemo.model.ContactDTO
 
 interface IClickListener {
     fun itemOnClick(position: ContactDTO)
+
+
 }

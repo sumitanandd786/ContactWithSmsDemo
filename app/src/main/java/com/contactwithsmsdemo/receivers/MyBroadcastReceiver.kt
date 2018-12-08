@@ -10,6 +10,7 @@ class MyBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         val bundle = intent!!.extras
 
+
         try {
             if (bundle != null) {
 

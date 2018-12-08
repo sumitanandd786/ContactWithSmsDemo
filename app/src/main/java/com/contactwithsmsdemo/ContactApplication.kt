@@ -8,5 +8,6 @@ class ContactApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         //Contacts.initialize(this)
+
     }
 }

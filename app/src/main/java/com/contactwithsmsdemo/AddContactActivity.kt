@@ -35,6 +35,7 @@ class AddContactActivity : AppCompatActivity(), View.OnClickListener {
     internal lateinit var addUserContact: Button
     internal var isToast = false
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity = this@AddContactActivity
@@ -52,6 +53,8 @@ class AddContactActivity : AppCompatActivity(), View.OnClickListener {
         personEmailId = findViewById(R.id.et_email) as EditText
         personEmailId.visibility = View.GONE
         addUserContact = findViewById(R.id.btn_submit) as Button
+        addUserContact.setOnClickListener(this)
+
     }
 
     override fun onClick(v: View?) {

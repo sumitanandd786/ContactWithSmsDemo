@@ -38,6 +38,8 @@ class SendSmsAdapter(items : List<Sms>, ctx: Context, listner: ISmsClickListener
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.sms_list_item,parent,false))
     }
 
+
+
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v){
         val profile = v.iv_profile!!
         val name = v.tv_name!!

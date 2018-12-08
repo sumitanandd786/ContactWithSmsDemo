@@ -23,6 +23,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+
         //Initialize the Handler
         mDelayHandler = Handler()
 

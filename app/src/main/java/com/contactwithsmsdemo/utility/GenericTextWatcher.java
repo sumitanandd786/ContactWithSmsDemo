@@ -65,6 +65,8 @@ public class GenericTextWatcher implements TextWatcher {
                 }
                 break;
             }
+
+
             if (p >= extra.length()) break;
             char pchar = extra.charAt(p);
             char ichar = prefix.charAt(i);

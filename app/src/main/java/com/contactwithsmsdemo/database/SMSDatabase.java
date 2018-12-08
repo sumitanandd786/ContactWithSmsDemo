@@ -30,6 +30,8 @@ SMSDatabase extends RoomDatabase {
                     .fallbackToDestructiveMigration().build();
         }
         return mInstance;
+
+
     }
 
     public static String getDatabaseName() {

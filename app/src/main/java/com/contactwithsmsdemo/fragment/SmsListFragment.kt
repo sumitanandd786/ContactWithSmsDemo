@@ -56,6 +56,8 @@ class SmsListFragment : Fragment(), ISmsClickListener {
 
     }
 
+
+
     fun setDataAdapter(dataList: List<Sms>) {
         if (dataList != null) {
             if (dataList!!.size > 0) {

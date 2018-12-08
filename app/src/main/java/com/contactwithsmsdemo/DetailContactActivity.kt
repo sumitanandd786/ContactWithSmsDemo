@@ -30,6 +30,8 @@ class DetailContactActivity : AppCompatActivity(),View.OnClickListener {
         init()
     }
 
+
+
     fun init() {
 
         profileImage = findViewById(R.id.iv_profile) as ImageView

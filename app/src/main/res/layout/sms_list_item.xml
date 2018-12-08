@@ -12,6 +12,7 @@
         android:padding="4dp"
         app:srcCompat="@drawable/ic_user" />
 
+
     <LinearLayout
         android:id="@+id/title_ll"
         android:layout_width="match_parent"

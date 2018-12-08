@@ -23,6 +23,8 @@ class TabPagerAdapter(fm: FragmentManager) :
     //private val mFragmentCounterList = ArrayList<Int>()
     //private var counter: Int? = 0
 
+
+
     override fun getItem(position: Int): Fragment? {
         val bundle = Bundle()
         bundle.putString(Constant.TYPE, mFragmentTitleList[position])

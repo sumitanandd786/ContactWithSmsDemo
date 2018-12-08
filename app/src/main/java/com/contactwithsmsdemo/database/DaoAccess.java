@@ -12,6 +12,8 @@ import java.util.List;
 @Dao
 public interface DaoAccess {
 
+
+
     @Insert
     void insertOnlySingleRecord(Sms... smsData);
 
